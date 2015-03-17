@@ -3,10 +3,10 @@
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-base-pom</artifactId>
   <packaging>pom</packaging>
-  <version>3.4.0</version>
+  <version>3.4.1-SNAPSHOT</version>
   <name>ingrid-base-pom</name>
   <properties>
-    <scmConnectionBase>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid</scmConnectionBase>
+    <scmConnectionBase>scm:git:git@github.com:informationgrid</scmConnectionBase>
     <!-- versions of ingrid libraries -->
 
     <ingrid-base-webapp.version>3.4.0</ingrid-base-webapp.version>
@@ -117,8 +117,8 @@
     <xtmStubs.version>3.0.0.1</xtmStubs.version>
   </properties>
   <scm>
-    <connection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-base-pom/tags/ingrid-base-pom-3.4.0</connection>
-    <developerConnection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-base-pom/tags/ingrid-base-pom-3.4.0</developerConnection>
+	<connection>scm:git:git@github.com:informationgrid/ingrid-base-pom.git</connection>
+	<developerConnection>scm:git:git@github.com:informationgrid/ingrid-base-pom.git</developerConnection>
   </scm>
   <dependencyManagement>
     <dependencies>
@@ -769,7 +769,7 @@
     <repository>
       <id>de.ingrid.m2</id>
       <name>Maven2 Repo InGrid</name>
-      <url>http://harrison.its-technidata.de/ingrid/maven2</url>
+      <url>https://dev.informationgrid.eu/archiva/repository/ingrid-all</url>
     </repository>
   </repositories>
   <distributionManagement>
