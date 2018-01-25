@@ -167,10 +167,10 @@
       <url>https://nexus.informationgrid.eu/repository/maven-releases/</url>
     </repository>
     <snapshotRepository>
-      <!-- <uniqueVersion>false</uniqueVersion> -->
       <id>nexus</id>
       <name>Nexus Repo InGrid Snapshot</name>
       <url>https://nexus.informationgrid.eu/repository/maven-snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
     </snapshotRepository>
   </distributionManagement>
 
