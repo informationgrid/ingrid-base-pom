@@ -7,7 +7,7 @@
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-base-pom</artifactId>
   <packaging>pom</packaging>
-  <version>4.2.1</version>
+  <version>4.2.2</version>
   <name>ingrid-base-pom</name>
   <scm>
     <connection>scm:git:git@github.com:informationgrid/ingrid-base-pom.git</connection>
@@ -167,10 +167,10 @@
       <url>https://nexus.informationgrid.eu/repository/maven-releases/</url>
     </repository>
     <snapshotRepository>
-      <!-- <uniqueVersion>false</uniqueVersion> -->
       <id>nexus</id>
       <name>Nexus Repo InGrid Snapshot</name>
       <url>https://nexus.informationgrid.eu/repository/maven-snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
     </snapshotRepository>
   </distributionManagement>
 
