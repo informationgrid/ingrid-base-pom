@@ -8,7 +8,7 @@
   <artifactId>ingrid-base-pom</artifactId>
   <packaging>pom</packaging>
   <version>5.0.0-SNAPSHOT</version>
-  <name>ingrid-base-pom</name>
+  <name>InGrid POM Base</name>
   <scm>
     <connection>scm:git:git@github.com:informationgrid/ingrid-base-pom.git</connection>
     <developerConnection>scm:git:git@github.com:informationgrid/ingrid-base-pom.git</developerConnection>
@@ -67,7 +67,9 @@
               <Implementation-Version>${project.version}</Implementation-Version>
               <Implementation-Build>${buildNumber}</Implementation-Build>
               <Build-Timestamp>${timestamp}</Build-Timestamp>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Build-Number>${BUILD_NUMBER}</Hudson-Build-Number>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Project>${JOB_NAME}</Hudson-Project>
             </manifestEntries>
           </archive>
@@ -84,7 +86,9 @@
               <Implementation-Version>${project.version}</Implementation-Version>
               <Implementation-Build>${buildNumber}</Implementation-Build>
               <Build-Timestamp>${timestamp}</Build-Timestamp>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Build-Number>${BUILD_NUMBER}</Hudson-Build-Number>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Project>${JOB_NAME}</Hudson-Project>
             </manifestEntries>
           </archive>
@@ -136,7 +140,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.0.1</version>
         <configuration>
-          <additionalparam>-Xdoclint:none</additionalparam>
+          <doclint>none</doclint>
         </configuration>
       </plugin>
       <plugin>
