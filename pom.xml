@@ -2,13 +2,15 @@
     This base pom is used as parent pom for defining repositories, plugins ...
     NOTICE: DO NOT add any dependency management cause these versions then can NOT BE OVERRIDDEN in subpoms via import pom mechanism !
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-base-pom</artifactId>
   <packaging>pom</packaging>
-  <version>4.5.0-SNAPSHOT</version>
-  <name>ingrid-base-pom</name>
+  <version>5.0.0-SNAPSHOT</version>
+  <name>InGrid POM Base</name>
+  <!-- ==================== Source Code Management ==================== -->
   <scm>
     <connection>scm:git:git@github.com:informationgrid/ingrid-base-pom.git</connection>
     <developerConnection>scm:git:git@github.com:informationgrid/ingrid-base-pom.git</developerConnection>
@@ -18,30 +20,55 @@
   <prerequisites>
     <maven>3.0</maven>
   </prerequisites>
- 
+
+  <!-- ==================== REPOSITORIES ==================== -->
+  <repositories>
+    <repository>
+      <id>nexus</id>
+      <name>Nexus Repo InGrid</name>
+      <url>https://nexus.informationgrid.eu/repository/maven-public/</url>
+    </repository>
+  </repositories>
+
+  <!-- ==================== PROPERTIES ==================== -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <!-- ==================== Build Configuration ==================== -->
   <build>
     <plugins>
+
+      <!--
+        Configure how to handle tests.
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.19.1</version>
+        <version>2.22.1</version>
         <configuration>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <encoding>UTF-8</encoding>
-          <inputEncoding>UTF-8</inputEncoding>
-          <outputEncoding>UTF-8</outputEncoding>
         </configuration>
       </plugin>
+
+      <!--
+        Configure the compiler.
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>3.8.0</version>
         <configuration>
           <encoding>UTF-8</encoding>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
       </plugin>
+
+      <!--
+        Add build number information to properties, which will be used by the maven-jar-plugin.
+      -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
@@ -59,26 +86,36 @@
           <doUpdate>false</doUpdate>
         </configuration>
       </plugin>
+
+      <!--
+        Add entries to the Manifest of the JAR.
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>3.1.0</version>
         <configuration>
           <archive>
             <manifestEntries>
               <Implementation-Version>${project.version}</Implementation-Version>
               <Implementation-Build>${buildNumber}</Implementation-Build>
               <Build-Timestamp>${timestamp}</Build-Timestamp>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Build-Number>${BUILD_NUMBER}</Hudson-Build-Number>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Project>${JOB_NAME}</Hudson-Project>
             </manifestEntries>
           </archive>
         </configuration>
       </plugin>
+
+      <!--
+        Add entries to the Manifest of the WAR.
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.2.2</version>
         <configuration>
           <archiveClasses>true</archiveClasses>
           <archive>
@@ -86,16 +123,22 @@
               <Implementation-Version>${project.version}</Implementation-Version>
               <Implementation-Build>${buildNumber}</Implementation-Build>
               <Build-Timestamp>${timestamp}</Build-Timestamp>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Build-Number>${BUILD_NUMBER}</Hudson-Build-Number>
+              <!--suppress UnresolvedMavenProperty -->
               <Hudson-Project>${JOB_NAME}</Hudson-Project>
             </manifestEntries>
           </archive>
         </configuration>
       </plugin>
+
+      <!--
+        Configure how license is checked and headed to the source files.
+      -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>1.13</version>
+        <version>1.16</version>
         <configuration>
           <inceptionYear>2014</inceptionYear>
           <organizationName>wemove digital solutions GmbH</organizationName>
@@ -111,10 +154,10 @@
           <processStartTag>**************************************************-</processStartTag>
           <processEndTag>**************************************************#</processEndTag>
           <excludes>
-              <exclude>**/*.properties</exclude>
-              <exclude>**/*.json</exclude>
-              <exclude>**/*.sql</exclude>
-              <exclude>**/*.xml</exclude>
+            <exclude>**/*.properties</exclude>
+            <exclude>**/*.json</exclude>
+            <exclude>**/*.sql</exclude>
+            <exclude>**/*.xml</exclude>
           </excludes>
         </configuration>
         <executions>
@@ -127,20 +170,23 @@
           </execution>
         </executions>
       </plugin>
-      <!-- latest release plugin necessary to support git correctly! -->
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
-      </plugin>
-      <!-- since Java8 the new doclint-option can lead to errors during release -->
+
+      <!--
+        Create Java documentation from sources.
+        Attention: since Java8 the new doclint-option can lead to errors during release
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.4</version>
+        <version>3.0.1</version>
         <configuration>
-          <additionalparam>-Xdoclint:none</additionalparam>
+          <doclint>none</doclint>
         </configuration>
       </plugin>
+
+      <!--
+        This plugin configures the git-flow for this project
+      -->
       <plugin>
         <groupId>external.atlassian.jgitflow</groupId>
         <artifactId>jgitflow-maven-plugin</artifactId>
@@ -152,13 +198,7 @@
       </plugin>
     </plugins>
   </build>
-  <repositories>
-    <repository>
-      <id>nexus</id>
-      <name>Nexus Repo InGrid</name>
-      <url>https://nexus.informationgrid.eu/repository/maven-public/</url>
-    </repository>
-  </repositories>
+
   <distributionManagement>
     <repository>
       <!-- <uniqueVersion>false</uniqueVersion> -->
@@ -174,7 +214,14 @@
     </snapshotRepository>
   </distributionManagement>
 
+  <!--
+    The following profiles define additional behaviors and can be manually activated.
+  -->
   <profiles>
+
+    <!--
+      During release we want to fail the build if a license header is missing or not up-to-date.
+    -->
     <profile>
       <id>validate-license-header-on-release</id>
       <activation>
