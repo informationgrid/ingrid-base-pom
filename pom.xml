@@ -7,7 +7,7 @@
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-base-pom</artifactId>
   <packaging>pom</packaging>
-  <version>5.0.0</version>
+  <version>7.0.0</version>
   <name>InGrid POM Base</name>
   <!-- ==================== Source Code Management ==================== -->
   <scm>
@@ -137,12 +137,13 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>1.16</version>
+        <version>2.3.0</version>
         <configuration>
           <inceptionYear>2014</inceptionYear>
           <organizationName>wemove digital solutions GmbH</organizationName>
           <projectName>${project.name}</projectName>
-          <licenseName>eupl_v1_1</licenseName>
+          <licenseName>eupl_v1_2</licenseName>
+          <licenseResolver>${project.baseUri}/src/license</licenseResolver>
           <!-- strange result when using encoding - modified file might be written in different format! -->
           <!-- <encoding>UTF-8</encoding> -->
           <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
