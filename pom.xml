@@ -7,7 +7,7 @@
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-base-pom</artifactId>
   <packaging>pom</packaging>
-  <version>7.0.0</version>
+  <version>7.1.0-SNAPSHOT</version>
   <name>InGrid POM Base</name>
   <!-- ==================== Source Code Management ==================== -->
   <scm>
